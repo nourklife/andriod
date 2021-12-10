@@ -21,17 +21,17 @@
 
 
             <ImageView
+                android:id="@+id/main_dish_img"
                 android:layout_width="@dimen/_70sdp"
                 android:layout_height="@dimen/_70sdp"
-                android:id="@+id/main_img_dish"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="-20dp"
                 android:layout_marginRight="-20dp"
-                android:src="@drawable/cat_img"/>
+                android:src="@drawable/cat_img" />
 
             <TextView
-                android:id="@+id/tv_dish_name"
+                android:id="@+id/main_dish_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Dish Name"

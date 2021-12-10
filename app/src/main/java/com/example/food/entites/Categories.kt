@@ -2,7 +2,7 @@ package com.example.food.entites
 
 
 import androidx.room.*
-import com.example.food.entites.converter.CategoeryListConverter
+import com.example.food.converter.CategoeryListConverter
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 

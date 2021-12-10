@@ -33,7 +33,7 @@ class SubCategoryAdapter: RecyclerView.Adapter<SubCategoryAdapter.RecipeViewHold
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
 
-        holder.itemView.tv_dish_name.text = arrSubCategory[position].dishname
+      //  holder.itemView.tv_dish_name.text = arrSubCategory[position].dishname
 
 
 

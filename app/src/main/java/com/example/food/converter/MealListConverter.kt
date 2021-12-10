@@ -1,4 +1,4 @@
-package com.example.food.entites.converter
+package com.example.food.converter
 
 import androidx.room.TypeConverter
 import com.example.food.entites.MealsItems

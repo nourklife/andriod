@@ -4,11 +4,10 @@ import android.app.Application
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.*
-import com.example.food.database.RecipeDatabase
 import com.example.food.entites.Categories
 import com.example.food.repository.Repository
+import com.example.food.retropfitmodel.Catogries
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,8 +17,7 @@ class MainViewModel @Inject constructor(
     val context: Application
 ) : AndroidViewModel(context) {
 
-    private val mutable: MutableLiveData<Categories> = MutableLiveData()
-    val recipeRsponse: LiveData<Categories> get() = mutable
+    val recipeResponse: MutableLiveData<Catogries> = MutableLiveData()
 
 
     fun getRecipe() {
@@ -29,21 +27,16 @@ class MainViewModel @Inject constructor(
     }
 
     private suspend fun handleResponce() {
-        repository.getRecipe().let {
+        repository.getData().let {
             if (it.isSuccessful) {
-                mutable.postValue(it.body())
+                recipeResponse.postValue(it.body())
                 Log.v("ANy", "${it.body()}")
             } else {
-                Log.v("ANy", "$it.code()")
+                Log.v("ANy", "${it.message()}")
                 Toast.makeText(context, "error: ${it.code()}", Toast.LENGTH_LONG).show()
             }
         }
     }
-
-
-
-
-
 
 
 }
