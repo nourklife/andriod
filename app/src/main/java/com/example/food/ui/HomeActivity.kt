@@ -33,16 +33,19 @@ class HomeActivity : AppCompatActivity() {
                 viewModel.getMeal(categoryName)
             }
         }
+        mainCatogeryAdapter.setClickListener(onCLicked)
 
         viewModel.mealResponse.observe(this, Observer {
             subCatogeryAdapter.setData(it.meals)
 
         })
         setUpMainRecycleView()
+        setUpSubReucucleview()
     }
 
     fun setUpMainRecycleView(){
         val rvMain = findViewById<RecyclerView>(R.id.rv_main_category)
+
         rvMain.apply {
             layoutManager = LinearLayoutManager(this@HomeActivity,LinearLayoutManager.HORIZONTAL,false)
             adapter = mainCatogeryAdapter

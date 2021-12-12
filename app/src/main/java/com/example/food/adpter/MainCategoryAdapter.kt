@@ -1,10 +1,8 @@
 package com.example.food.adpter
-
 import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -33,9 +31,7 @@ class MainCategoryAdapter(val context: Activity) :
         val currentPosition = arrMainCategory[position]
         val image = holder.itemView.findViewById<ImageView>(R.id.main_dish_img)
         holder.itemView.findViewById<TextView>(R.id.main_dish_name).text = currentPosition.strCategory
-        holder.itemView.rootView.setOnClickListener{
-            listener!!.onClicked(arrMainCategory[position].strCategory)
-        }
+        holder.itemView.rootView.setOnClickListener { listener!!.onClicked(arrMainCategory[position].strCategory) }
 
         Glide
             .with(context)
