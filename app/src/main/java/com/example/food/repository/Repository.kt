@@ -2,18 +2,11 @@ package com.example.food.repository
 
 import com.example.food.Dao.RecipeDao
 import com.example.food.api.GetDataServices
-import com.example.food.entites.Categories
-import com.example.food.entites.Categories_item
 import com.example.food.retropfitmodel.Catogries
-import dagger.hilt.android.scopes.ActivityRetainedScoped
+import com.example.food.retropfitmodel.Meal
 import dagger.hilt.android.scopes.ViewModelScoped
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import retrofit2.Call
 import retrofit2.Response
 import javax.inject.Inject
-import javax.microedition.khronos.opengles.GL
 
 
 @ViewModelScoped
@@ -35,6 +28,9 @@ class Repository @Inject constructor(
 
     suspend fun getData(): Response<Catogries> {
         return servicesData.getCatogery()
+    }
+    suspend fun getMeal(categoryName:String):Response<Meal>{
+        return  servicesData.getMeal(categoryName)
     }
 
 

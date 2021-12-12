@@ -1,6 +1,6 @@
 package com.example.food.retropfitmodel
 
-data class CatogeryItem(
+data class CategoryItem(
     val idCategory: String,
     val strCategory: String,
     val strCategoryDescription: String,
