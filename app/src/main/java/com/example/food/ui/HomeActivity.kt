@@ -28,12 +28,8 @@ class HomeActivity : AppCompatActivity() {
         viewModel.recipeResponse.observe(this, Observer {
             mainCatogeryAdapter.setData(it.categories)
         })
-        val onCLicked  = object :MainCategoryAdapter.onItemClickListener{
-            override fun onClicked(categoryName: String) {
-                viewModel.getMeal(categoryName)
-            }
-        }
-        mainCatogeryAdapter.setClickListener(onCLicked)
+
+
 
         viewModel.mealResponse.observe(this, Observer {
             subCatogeryAdapter.setData(it.meals)
@@ -45,7 +41,14 @@ class HomeActivity : AppCompatActivity() {
 
     fun setUpMainRecycleView(){
         val rvMain = findViewById<RecyclerView>(R.id.rv_main_category)
+        val onCLicked  = object :MainCategoryAdapter.onItemClickListener{
+            override fun onClicked(categoryName: String) {
+                viewModel.getMeal(categoryName)
 
+            }
+
+        }
+        mainCatogeryAdapter.setClickListener(onCLicked)
         rvMain.apply {
             layoutManager = LinearLayoutManager(this@HomeActivity,LinearLayoutManager.HORIZONTAL,false)
             adapter = mainCatogeryAdapter
