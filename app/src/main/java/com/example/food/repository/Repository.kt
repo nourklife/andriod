@@ -4,6 +4,7 @@ import com.example.food.Dao.RecipeDao
 import com.example.food.api.GetDataServices
 import com.example.food.retropfitmodel.Catogries
 import com.example.food.retropfitmodel.Meal
+import com.example.food.retropfitmodel.MealRespnse
 import dagger.hilt.android.scopes.ViewModelScoped
 import retrofit2.Response
 import javax.inject.Inject
@@ -31,6 +32,9 @@ class Repository @Inject constructor(
     }
     suspend fun getMeal(categoryName:String):Response<Meal>{
         return  servicesData.getMeal(categoryName)
+    }
+    suspend fun getSpecificity(id:String):Response<MealRespnse>{
+               return servicesData.getSpecificItem(id)
     }
 
 

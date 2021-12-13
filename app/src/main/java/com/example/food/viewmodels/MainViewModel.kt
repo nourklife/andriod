@@ -7,6 +7,7 @@ import androidx.lifecycle.*
 import com.example.food.entites.Meal
 import com.example.food.repository.Repository
 import com.example.food.retropfitmodel.Catogries
+import com.example.food.retropfitmodel.MealRespnse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,6 +20,8 @@ class MainViewModel @Inject constructor(
 
     val recipeResponse: MutableLiveData<Catogries> = MutableLiveData()
     val mealResponse: MutableLiveData<com.example.food.retropfitmodel.Meal> = MutableLiveData()
+    val mealdetails: MutableLiveData<MealRespnse> = MutableLiveData()
+
 
 
     fun getRecipe() {
@@ -26,15 +29,21 @@ class MainViewModel @Inject constructor(
             handleResponse()
         }
     }
-    fun getMeal(mealid: String) {
+    fun getMeal(catogeryName: String) {
         viewModelScope.launch {
-            handleMealResponse(mealid)
+            handleMealResponse(catogeryName)
+        }
+    }
+    fun getMealDetails(id:String){
+        viewModelScope.launch {
+            handleMealDetails(id)
         }
     }
 
     private suspend fun handleResponse() {
         repository.getData().let {
             if (it.isSuccessful) {
+
                 recipeResponse.postValue(it.body())
                 Log.v("ANy", "${it.body()}")
             } else {
@@ -48,13 +57,24 @@ class MainViewModel @Inject constructor(
         repository.getMeal(mealid).let {
             if (it.isSuccessful) {
                mealResponse.postValue(it.body())
-                Log.v("ANy", "${it.body()}")
+                Log.v("meal", "${it.body()}")
             } else {
-                Log.v("ANy", "${it.message()}")
+                Log.v("meal", "${it.message()}")
                 Toast.makeText(context, "error: ${it.code()}", Toast.LENGTH_LONG).show()
             }
         }
 
+    }
+    private suspend fun handleMealDetails(id:String){
+        repository.getSpecificity(id).let {
+            if(it.isSuccessful){
+                mealdetails.postValue(it.body())
+                Log.v("mealDetails", "${it.body()}")
+            }else {
+                Log.v("mealDetails", "${it.message()}")
+                Toast.makeText(context, "error: ${it.code()}", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
 

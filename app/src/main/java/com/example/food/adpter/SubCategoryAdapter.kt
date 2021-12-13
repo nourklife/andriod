@@ -12,32 +12,51 @@ import com.bumptech.glide.Glide
 import com.example.food.R
 import com.example.food.retropfitmodel.MealItem
 
-class SubCategoryAdapter(val context: Activity): RecyclerView.Adapter<SubCategoryAdapter.RecipeViewHolder>() {
+class SubCategoryAdapter(val context: Activity) :
+    RecyclerView.Adapter<SubCategoryAdapter.RecipeViewHolder>() {
 
 
-    var listener: AdapterView.OnItemClickListener? = null
+
     var arrSubCategory = emptyList<MealItem>()
-    class RecipeViewHolder(view: View): RecyclerView.ViewHolder(view){
+    var listener: SubCategoryAdapter.onItemClickListener?=null
+
+    interface onItemClickListener {
+        fun onClicked(id:Int)
+
 
     }
 
-    fun setData(arrData : List<MealItem>){
+    class RecipeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+    }
+
+    fun setData(arrData: List<MealItem>) {
         arrSubCategory = arrData
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
 
-        return RecipeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_rv_sub_category,parent,false))
+        return RecipeViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_rv_sub_category, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {
         return arrSubCategory.size
     }
 
+    fun setOnItemclickListiner(listener1:SubCategoryAdapter.onItemClickListener) {
+        listener = listener1
+    }
+
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         val currentPosition = arrSubCategory[position]
         val image = holder.itemView.findViewById<ImageView>(R.id.img_dish)
+        holder.itemView.rootView.setOnClickListener {
+         listener!!.onClicked(currentPosition.idMeal.toInt())
+        }
         holder.itemView.findViewById<TextView>(R.id.tv_dish_name).text = currentPosition.strMeal
         Glide
             .with(context)
@@ -47,10 +66,8 @@ class SubCategoryAdapter(val context: Activity): RecyclerView.Adapter<SubCategor
             .into(image)
 
 
-
-
-
     }
+
 
 
 }

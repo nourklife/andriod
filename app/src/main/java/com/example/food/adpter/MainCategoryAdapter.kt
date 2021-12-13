@@ -14,7 +14,7 @@ class MainCategoryAdapter(val context: Activity) :
     RecyclerView.Adapter<MainCategoryAdapter.RecipeViewHolder>() {
 
     private var arrMainCategory = emptyList<CategoryItem>()
-    var listener:MainCategoryAdapter.onItemClickListener?= null
+    var listener:onItemClickListener?= null
 
     class RecipeViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -51,7 +51,7 @@ class MainCategoryAdapter(val context: Activity) :
     fun setData(arrData: List<CategoryItem>) {
         arrMainCategory = arrData
     }
-    fun setClickListener(listener1: MainCategoryAdapter.onItemClickListener){
+    fun setClickListener(listener1: onItemClickListener){
         listener = listener1
     }
 
