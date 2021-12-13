@@ -21,7 +21,7 @@ class SubCategoryAdapter(val context: Activity) :
     var listener: SubCategoryAdapter.onItemClickListener?=null
 
     interface onItemClickListener {
-        fun onClicked(id:Int)
+        fun onClicked(id:String)
 
 
     }
@@ -55,7 +55,7 @@ class SubCategoryAdapter(val context: Activity) :
         val currentPosition = arrSubCategory[position]
         val image = holder.itemView.findViewById<ImageView>(R.id.img_dish)
         holder.itemView.rootView.setOnClickListener {
-         listener!!.onClicked(currentPosition.idMeal.toInt())
+         listener!!.onClicked(currentPosition.idMeal)
         }
         holder.itemView.findViewById<TextView>(R.id.tv_dish_name).text = currentPosition.strMeal
         Glide

@@ -16,7 +16,8 @@
         android:theme="@style/Theme.Food">
         <activity
             android:name=".ui.DeatailsActivity"
-            android:exported="false" />
+            android:screenOrientation="locked"/>
+
         <activity
             android:name=".ui.SplashActivity"
             android:exported="true"

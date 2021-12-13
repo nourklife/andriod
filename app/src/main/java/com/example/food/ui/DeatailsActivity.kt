@@ -1,5 +1,4 @@
 package com.example.food.ui
-
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -12,25 +11,27 @@ import com.bumptech.glide.Glide
 import com.example.food.R
 import com.example.food.viewmodels.MainViewModel
 import com.makeramen.roundedimageview.RoundedImageView
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_deatails.*
 
+@AndroidEntryPoint
 class DeatailsActivity : AppCompatActivity() {
     var youtubeLink = ""
-    lateinit var viewModel: MainViewModel
+    lateinit var viewModelMeal: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_deatails)
         var image=findViewById<RoundedImageView>(R.id.imgItem)
         var tvCatogery=findViewById<TextView>(R.id.tvCategory)
-        var id=intent.getStringExtra("id")
+        val id=intent.getStringExtra("id")
         btnYoutube.setOnClickListener {
             val uri = Uri.parse(youtubeLink)
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
         }
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.getMealDetails(id!!)
-        viewModel.mealdetails.observe(this, Observer { response->
+        viewModelMeal= ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModelMeal.getMealDetails(id!!)
+        viewModelMeal.mealdetails.observe(this, Observer { response->
             Glide.with(this).load(response.meals[0].strMealThumb).into(image)
             tvCatogery.text = response.meals[0].strMeal
             var ingredient = "${response.meals[0].strIngredient1}      ${response.meals[0].strMeasure1}\n" +

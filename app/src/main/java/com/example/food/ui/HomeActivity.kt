@@ -38,7 +38,7 @@ class HomeActivity : AppCompatActivity() {
         setUpSubReucucleview()
 
         val onSubCLicked = object : SubCategoryAdapter.onItemClickListener {
-            override fun onClicked(id: Int) {
+            override fun onClicked(id: String) {
                 var intent = Intent(this@HomeActivity, DeatailsActivity::class.java)
                 intent.putExtra("id", id)
                 startActivity(intent)
@@ -55,6 +55,7 @@ class HomeActivity : AppCompatActivity() {
         rvMain.apply {
             layoutManager = LinearLayoutManager(this@HomeActivity,LinearLayoutManager.HORIZONTAL,false)
             adapter = mainCatogeryAdapter
+
         }
         val onCLicked  = object :MainCategoryAdapter.onItemClickListener{
             override fun onClicked(categoryName: String) {
@@ -76,6 +77,7 @@ class HomeActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@HomeActivity,LinearLayoutManager.HORIZONTAL
                 ,false)
             adapter = subCatogeryAdapter
+            itemAnimator = null
         }
 
 
